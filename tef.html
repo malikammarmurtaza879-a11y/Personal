@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tareen Education Foundation</title>
+  <link rel="stylesheet" href="./tef.css" />
+</head>
+<body>
+  <header>
+    <img src="./Images/logo.png" alt="TEF Logo" class="logo" />
+    <nav>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Initiatives</a></li>
+        <li><a href="#">Our Schools</a></li>
+        <li><a href="#">Downloads</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Image Slider -->
+  <section class="slider">
+    <div class="slides">
+      <img src="./Images/1.png" alt="Slide 1" />
+      <img src="./Images/2.png" alt="Slide 2" />
+      <img src="./Images/3.png" alt="Slide 3" />
+      <img src="./Images/4.png" alt="Slide 4" />
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </section>
+
+<section class="about py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h4>TAREEN EDUCATION FOUNDATION (TEF)</h4>
+        <h5><strong>is a nonprofit</strong></h5>
+        <p>Organisation with a mandate to improve quality of education in Pakistan; primarily operating in the rural areas of Southern Punjab. Tareen Education Foundation (TEF) is a nonprofit organisation established under The Societies Registration Act of 1860 with a mandate to improve quality of education in Pakistan.</p>
+      </div>
+      <div class="col-lg-4">
+        <img src="./Images/our-vision.png" alt="Vision Icon" />
+        <h4>OUR VISION</h4>
+        <p>Our objective is to create centres of learning, which provide students an enabling environment to develop their faculties of critical analysis and independent thinking, to polish their communication and articulation skills, to increase their understanding of social issues, and to make them active.</p>
+      </div>
+      <div class="col-lg-4">
+        <img src="./Images/our-mission.png" alt="Mission Icon" />
+        <h4>OUR MISSION</h4>
+        <p>TEF is a non-profit organization with a mandate to provide quality education, especially to the marginalized communities, such as the rural poor and women.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer with Animated Numbers -->
+  <footer>
+    <div class="footer-boxes">
+      <div class="footer-box">
+        <img src="./Images/school.png" alt="Schools" />
+        <h3 class="count" data-target="140">0</h3>
+        <p>Schools</p>
+      </div>
+      <div class="footer-box">
+        <img src="./Images/Students.png" alt="Students" />
+        <h3 class="count" data-target="4000">0</h3>
+        <p>Students</p>
+      </div>
+      <div class="footer-box">
+        <img src="./Images/employee.png" alt="Employees" />
+        <h3 class="count" data-target="246">0</h3>
+        <p>Staff</p>
+      </div>
+      <div class="footer-box">
+        <img src="./Images/college.png" alt="Colleges" />
+        <h3 class="count" data-target="11">0</h3>
+        <p>Colleges</p>
+      </div>
+    </div>
+    <p>&copy; 2025 Tareen Education Foundation. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Slider logic
+    const slides = document.querySelector('.slides');
+    const slideImages = document.querySelectorAll('.slides img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let counter = 0;
+
+    function showSlide(index) {
+      if (index >= slideImages.length) counter = 0;
+      if (index < 0) counter = slideImages.length - 1;
+      slides.style.transform = `translateX(${-counter * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      counter++;
+      showSlide(counter);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      counter--;
+      showSlide(counter);
+    });
+
+    // Auto-slide
+    setInterval(() => {
+      counter++;
+      showSlide(counter);
+    }, 5000);
+
+    // Animate footer numbers
+    const counters = document.querySelectorAll('.count');
+    const speed = 100;
+
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = target / speed;
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(updateCount, 40);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+        updateCount();
+      });
+    };
+
+    const footer = document.querySelector('footer');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          observer.unobserve(footer);
+        }
+      });
+    });
+    observer.observe(footer);
+  </script>
+</body>
+</html>

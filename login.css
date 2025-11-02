@@ -1,0 +1,36 @@
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20px;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #ffcc00,
+    0 0 40px #ffcc00,
+    0 0 80px #ffcc00;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #ffcc00,
+      0 0 40px #ffcc00,
+      0 0 80px #ffcc00;
+  }
+  to {
+    text-shadow: 
+      0 0 10px #fff,
+      0 0 20px #ffcc33,
+      0 0 40px #ffcc33,
+      0 0 80px #ffcc33,
+      0 0 160px #ffcc33;
+  }
+}
+
+body {
+  background-color: #000; /* Helps glow stand out */
+}

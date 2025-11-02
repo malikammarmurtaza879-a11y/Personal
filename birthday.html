@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Ammar 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .start-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ff00cc, #3333ff);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 40px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 51, 204, 0.7);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .card {
+            position: relative;
+            width: 320px;
+            height: 420px;
+            perspective: 1000px;
+            display: none;
+        }
+
+        .inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 1.2s;
+            transform-style: preserve-3d;
+        }
+
+        .card.open .inner {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .front {
+            background: linear-gradient(135deg, #ff0099, #493240);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .front h2 {
+            font-size: 2em;
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff0099;
+            animation: glow 2s infinite alternate;
+        }
+
+        .front h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+
+        .front p {
+            margin-top: 15px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 15px #fff, 0 0 30px #ff0099;
+            }
+
+            to {
+                text-shadow: 0 0 30px #fff, 0 0 60px #ff33cc;
+            }
+        }
+
+        .back {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            transform: rotateY(180deg);
+            padding: 25px;
+            text-align: center;
+        }
+
+        .back h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .back p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.5), transparent 70%);
+            filter: blur(120px);
+            animation: pulse2 5s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulse2 {
+            from {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            to {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: rise 10s linear infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: gold;
+            top: -10px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .replay-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff33cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 51, 204, 0.6);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .replay-btn:hover {
+            background: #ff66ff;
+            box-shadow: 0 0 20px rgba(255, 153, 255, 0.8);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                width: 280px;
+                height: 380px;
+            }
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow"></div>
+
+    <button class="start-btn" id="startBtn">🎵 Start the Celebration</button>
+
+    <div class="card" id="birthdayCard">
+        <div class="inner">
+            <div class="front">
+                <h2>🎉 Happy Birthday 🎂</h2>
+                <h3>Ammar</h3>
+                <p>Your magical surprise is loading 💌</p>
+            </div>
+            <div class="back">
+                <h3>Dear Ammar 💖</h3>
+                <p>May your day be filled with light, laughter, and love.<br>
+                    Wishing you endless happiness, success, and joy ahead.<br>
+                    You deserve the brightest stars and the most beautiful moments. 🌟</p>
+                <p style="margin-top:15px;">— With Best Wishes 🎁</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="replay-btn" id="replayBtn">🔁 Replay Celebration</button>
+
+    <audio id="birthdayMusic" loop>
+        <source src="./Happy_birthday_to_you_MIDI(chosic.com).mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        const card = document.getElementById("birthdayCard");
+        const music = document.getElementById("birthdayMusic");
+        const replayBtn = document.getElementById("replayBtn");
+        const startBtn = document.getElementById("startBtn");
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function createBalloons() {
+            for (let i = 0; i < 15; i++) {
+                const balloon = document.createElement("div");
+                balloon.classList.add("balloon");
+                balloon.style.left = `${random(0, 100)}vw`;
+                balloon.style.background = `hsl(${random(0, 360)}, 80%, 60%)`;
+                balloon.style.animationDelay = `${random(0, 5)}s`;
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 10000);
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = `${random(0, 100)}vw`;
+                confetti.style.background = `hsl(${random(0, 360)}, 80%, 60%)`;
+                confetti.style.animationDuration = `${random(2, 4)}s`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        function celebrate() {
+            card.classList.add("open");
+            createBalloons();
+            createConfetti();
+            replayBtn.style.display = "block";
+        }
+
+        startBtn.addEventListener("click", () => {
+            startBtn.style.display = "none";
+            card.style.display = "block";
+            music.play();
+            setTimeout(() => celebrate(), 1000);
+        });
+
+        replayBtn.addEventListener("click", () => {
+            card.classList.remove("open");
+            replayBtn.style.display = "none";
+            setTimeout(() => celebrate(), 1000);
+        });
+    </script>
+</body>
+
+</html>
