@@ -12,6 +12,7 @@ body {
   background: radial-gradient(circle at top, #020617, #000);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background 0.6s ease;
 }
 
 /* ===== HEADER ===== */
@@ -22,11 +23,12 @@ header {
   padding: 20px 60px;
   background: linear-gradient(90deg, #051937, #00224e, #1f0026);
   background-size: 300% 300%;
-  animation: headerGradient 10s ease infinite;
+  animation: headerGradient 12s ease infinite;
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 0 25px rgba(255, 0, 100, 0.25);
+  transition: all 0.4s ease;
 }
 
 @keyframes headerGradient {
@@ -45,13 +47,14 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 35px;
+  transition: all 0.3s ease;
 }
 
 nav ul li a {
   color: #cfcfcf;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 nav ul li a:hover,
@@ -72,17 +75,18 @@ nav ul li a.active {
   height: 3px;
   background: #fff;
   border-radius: 5px;
+  transition: 0.3s;
 }
 
 /* ===== SERVICES SECTION ===== */
 .services-section {
   position: relative;
-  padding: 100px 10%;
+  padding: 100px 8%;
   text-align: center;
-
   background: radial-gradient(circle at top, #054451, #043a3e);
   min-height: 100vh;
   overflow: hidden;
+  transition: all 0.4s ease;
 }
 
 /* Glowing overlay effect */
@@ -98,7 +102,7 @@ nav ul li a.active {
 
 @keyframes glowPulse {
   0% { opacity: 0.6; }
-  100% { opacity: 0.85; }
+  100% { opacity: 0.9; }
 }
 
 /* ===== HEADINGS ===== */
@@ -120,6 +124,7 @@ nav ul li a.active {
   margin-bottom: 60px;
   color: #fff;
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+  transition: font-size 0.3s ease;
 }
 
 /* ===== SERVICE CARDS ===== */
@@ -129,6 +134,7 @@ nav ul li a.active {
   gap: 40px;
   position: relative;
   z-index: 2;
+  padding-bottom: 50px;
 }
 
 .service-card {
@@ -182,7 +188,7 @@ nav ul li a.active {
 
 /* Hover glow */
 .service-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 0 0 25px rgba(255, 51, 102, 0.3), 0 0 40px rgba(0, 180, 255, 0.2);
   background: linear-gradient(145deg, rgba(255, 0, 100, 0.1), rgba(0, 140, 255, 0.1));
 }
@@ -208,12 +214,13 @@ footer {
 @media (max-width: 900px) {
   header { padding: 15px 25px; }
   .menu-toggle { display: flex; }
+
   nav ul {
     position: absolute;
     top: 70px;
     right: -100%;
     flex-direction: column;
-    background: rgba(5, 5, 20, 0.95);
+    background: rgba(5, 5, 20, 0.97);
     width: 220px;
     text-align: center;
     transition: right 0.3s ease;
@@ -226,4 +233,6 @@ footer {
 @media (max-width: 600px) {
   .services-header h2 { font-size: 2rem; }
   .service-card { padding: 30px 20px; }
+  .services-container { gap: 25px; }
+  footer { font-size: 0.8rem; }
 }
