@@ -11,6 +11,7 @@ body {
   background: radial-gradient(circle at top, #073e45, #340747 90%);
   color: #fff;
   overflow-x: hidden;
+  transition: all 0.4s ease;
 }
 
 /* ===== HEADER ===== */
@@ -21,10 +22,11 @@ header {
   padding: 18px 60px;
   background: linear-gradient(90deg, #5c131f, #022131, #290e42);
   background-size: 300% 300%;
-  animation: headerGradient 10s ease infinite;
+  animation: headerGradient 12s ease infinite;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 0 25px rgba(255, 0, 85, 0.3);
 }
 
 @keyframes headerGradient {
@@ -37,7 +39,14 @@ header h2 a {
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(255,255,255,0.7);
+  text-shadow: 0 0 12px rgba(255,255,255,0.7);
+  font-size: 1.5rem;
+  transition: 0.3s ease;
+}
+
+header h2 a:hover {
+  color: #ff66b2;
+  text-shadow: 0 0 15px #ff66b2, 0 0 25px #ff3399;
 }
 
 nav ul {
@@ -49,21 +58,39 @@ nav ul {
 nav ul li a {
   color: #ccc;
   text-decoration: none;
-  transition: 0.3s ease;
+  position: relative;
+  transition: all 0.4s ease;
 }
 
-nav ul li a.active,
-nav ul li a:hover {
-  color: #ff0055;
-  text-shadow: 0 0 15px #ff66b2;
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: #ff66b2;
+  transition: width 0.4s ease;
 }
 
-/* ===== MENU TOGGLE ===== */
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ff66b2;
+  text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff3399;
+}
+
+/* ===== HAMBURGER MENU ===== */
 .menu-toggle {
   display: none;
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
+  z-index: 1100;
 }
 
 .menu-toggle span {
@@ -71,31 +98,37 @@ nav ul li a:hover {
   height: 3px;
   background: #fff;
   border-radius: 5px;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 5px rgba(255,102,178,0.7);
 }
 
 .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
+  box-shadow: 0 0 12px #ff66b2, 0 0 25px #ff3399;
 }
 .menu-toggle.active span:nth-child(2) { opacity: 0; }
 .menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
+  box-shadow: 0 0 12px #ff66b2, 0 0 25px #ff3399;
 }
 
 /* ===== CONTACT SECTION ===== */
 .contact-section {
   padding: 100px 10%;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-section h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  text-shadow: 0 0 25px rgba(255, 0, 85, 0.5);
+  text-shadow: 0 0 25px rgba(255, 0, 85, 0.5), 0 0 50px rgba(255, 102, 178, 0.4);
 }
 
 .contact-section h1 span {
-  color: #ff0055;
+  color: #ff66b2;
+  text-shadow: 0 0 20px #ff66b2, 0 0 35px #ff3399;
 }
 
 .intro {
@@ -104,6 +137,7 @@ nav ul li a:hover {
   font-size: 1.1rem;
 }
 
+/* Contact Card */
 .contact-container {
   display: flex;
   justify-content: center;
@@ -111,27 +145,29 @@ nav ul li a:hover {
 
 .contact-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 40px;
   border-radius: 20px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
-  backdrop-filter: blur(10px);
-  animation: fadeIn 1s ease;
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 1s ease forwards;
   text-align: left;
+  transition: all 0.4s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(255, 0, 85, 0.6), 0 0 60px rgba(255, 102, 178, 0.4);
 }
 
 .contact-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #ff66b2;
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: 0 0 15px #ff66b2, 0 0 25px #ff3399;
 }
 
 .contact-card p {
@@ -144,8 +180,8 @@ nav ul li a:hover {
 }
 
 .contact-card i {
-  color: #ff0055;
-  text-shadow: 0 0 10px #ff66b2;
+  color: #ff66b2;
+  text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff3399;
 }
 
 .contact-card a {
@@ -156,7 +192,7 @@ nav ul li a:hover {
 
 .contact-card a:hover {
   color: #fff;
-  text-shadow: 0 0 10px #ff66b2;
+  text-shadow: 0 0 12px #ff66b2, 0 0 25px #ff3399;
 }
 
 /* ===== MAP EMBED ===== */
@@ -172,17 +208,19 @@ nav ul li a:hover {
   height: 350px;
   border: none;
   border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 0, 85, 0.3);
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.4);
+  transition: all 0.4s ease;
 }
 
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 40px 10%;
-  background: #042e3d;
+  padding: 50px 10%;
+  background: linear-gradient(135deg, #290e42, #022131);
   border-top: 1px solid rgba(255,255,255,0.1);
   font-size: 0.9rem;
   color: #aaa;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -195,15 +233,22 @@ footer {
     position: absolute;
     top: 70px;
     right: -100%;
-    width: 220px;
+    width: 240px;
     background: rgba(5, 10, 25, 0.95);
     transition: right 0.3s ease;
-    border-left: 2px solid #ff0055;
+    border-left: 2px solid #ff66b2;
   }
   nav ul {
     flex-direction: column;
     text-align: center;
     padding: 20px 0;
+    gap: 15px;
   }
   nav.active { right: 0; }
+}
+
+@media (max-width: 600px) {
+  .contact-section h1 { font-size: 2.2rem; }
+  .contact-card { padding: 25px; }
+  .map-container iframe { height: 250px; }
 }
