@@ -5,11 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tareen Education Foundation</title>
   <link rel="stylesheet" href="./tef.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- ===== HEADER ===== -->
   <header>
-    <img src="./logo.png" alt="TEF Logo" class="logo" />
-    <nav>
+    <h2 class="logo"><a href="#"><img src="./logo.png" alt="TEF Logo" /></a></h2>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="navbar">
       <ul>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Our Initiatives</a></li>
@@ -32,28 +44,27 @@
     <button class="next">&#10095;</button>
   </section>
 
-<section class="about py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <h4>TAREEN EDUCATION FOUNDATION (TEF)</h4>
-        <h5><strong>is a nonprofit</strong></h5>
-        <p>Organisation with a mandate to improve quality of education in Pakistan; primarily operating in the rural areas of Southern Punjab. Tareen Education Foundation (TEF) is a nonprofit organisation established under The Societies Registration Act of 1860 with a mandate to improve quality of education in Pakistan.</p>
-      </div>
-      <div class="col-lg-4">
-        <img src="./our-vision.png" alt="Vision Icon" />
-        <h4>OUR VISION</h4>
-        <p>Our objective is to create centres of learning, which provide students an enabling environment to develop their faculties of critical analysis and independent thinking, to polish their communication and articulation skills, to increase their understanding of social issues, and to make them active.</p>
-      </div>
-      <div class="col-lg-4">
-        <img src="./our-mission.png" alt="Mission Icon" />
-        <h4>OUR MISSION</h4>
-        <p>TEF is a non-profit organization with a mandate to provide quality education, especially to the marginalized communities, such as the rural poor and women.</p>
+  <section class="about py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>TAREEN EDUCATION FOUNDATION (TEF)</h4>
+          <h5><strong>is a nonprofit</strong></h5>
+          <p>Organisation with a mandate to improve quality of education in Pakistan; primarily operating in the rural areas of Southern Punjab. Tareen Education Foundation (TEF) is a nonprofit organisation established under The Societies Registration Act of 1860 with a mandate to improve quality of education in Pakistan.</p>
+        </div>
+        <div class="col-lg-4">
+          <img src="./our-vision.png" alt="Vision Icon" />
+          <h4>OUR VISION</h4>
+          <p>Our objective is to create centres of learning, which provide students an enabling environment to develop their faculties of critical analysis and independent thinking, to polish their communication and articulation skills, to increase their understanding of social issues, and to make them active.</p>
+        </div>
+        <div class="col-lg-4">
+          <img src="./our-mission.png" alt="Mission Icon" />
+          <h4>OUR MISSION</h4>
+          <p>TEF is a non-profit organization with a mandate to provide quality education, especially to the marginalized communities, such as the rural poor and women.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Footer with Animated Numbers -->
   <footer>
@@ -75,7 +86,7 @@
       </div>
       <div class="footer-box">
         <img src="./college.png" alt="Colleges" />
-        <h3 class="count" data-target="11">0</h3>
+        <h3 class="count" data-target="20">0</h3>
         <p>Colleges</p>
       </div>
     </div>
@@ -84,12 +95,19 @@
 
   <!-- Scripts -->
   <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbar = document.getElementById("navbar");
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      navbar.classList.toggle("active");
+    });
+
     // Slider logic
     const slides = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides img');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
-
     let counter = 0;
 
     function showSlide(index) {
@@ -98,35 +116,23 @@
       slides.style.transform = `translateX(${-counter * 100}%)`;
     }
 
-    nextBtn.addEventListener('click', () => {
-      counter++;
-      showSlide(counter);
-    });
-
-    prevBtn.addEventListener('click', () => {
-      counter--;
-      showSlide(counter);
-    });
-
-    // Auto-slide
-    setInterval(() => {
-      counter++;
-      showSlide(counter);
-    }, 5000);
+    nextBtn.addEventListener('click', () => { counter++; showSlide(counter); });
+    prevBtn.addEventListener('click', () => { counter--; showSlide(counter); });
+    setInterval(() => { counter++; showSlide(counter); }, 5000);
 
     // Animate footer numbers
     const counters = document.querySelectorAll('.count');
-    const speed = 100;
+    const speed = 50;
 
     const animateCounters = () => {
       counters.forEach(counter => {
         const updateCount = () => {
           const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText;
-          const increment = target / speed;
+          const count = +counter.innerText.replace(/,/g, '');
+          const increment = Math.ceil(target / speed);
 
           if (count < target) {
-            counter.innerText = Math.ceil(count + increment);
+            counter.innerText = (count + increment).toLocaleString();
             setTimeout(updateCount, 40);
           } else {
             counter.innerText = target.toLocaleString();
@@ -147,6 +153,6 @@
     });
     observer.observe(footer);
   </script>
+
 </body>
 </html>
-
