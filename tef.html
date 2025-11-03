@@ -14,13 +14,11 @@
   <!-- ===== HEADER ===== -->
   <header>
     <h2 class="logo"><a href="#"><img src="./logo.png" alt="TEF Logo" /></a></h2>
-
     <div class="menu-toggle" id="menu-toggle">
       <span></span>
       <span></span>
       <span></span>
     </div>
-
     <nav id="navbar">
       <ul>
         <li><a href="#">About Us</a></li>
@@ -32,7 +30,7 @@
     </nav>
   </header>
 
-  <!-- Image Slider -->
+  <!-- ===== IMAGE SLIDER ===== -->
   <section class="slider">
     <div class="slides">
       <img src="./1.png" alt="Slide 1" />
@@ -44,6 +42,7 @@
     <button class="next">&#10095;</button>
   </section>
 
+  <!-- ===== ABOUT SECTION ===== -->
   <section class="about py-5">
     <div class="container">
       <div class="row">
@@ -66,7 +65,7 @@
     </div>
   </section>
 
-  <!-- Footer with Animated Numbers -->
+  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-boxes">
       <div class="footer-box">
@@ -93,9 +92,9 @@
     <p>&copy; 2025 Tareen Education Foundation. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // Hamburger menu toggle
+    // Hamburger toggle
     const menuToggle = document.getElementById("menu-toggle");
     const navbar = document.getElementById("navbar");
     menuToggle.addEventListener("click", () => {
@@ -103,52 +102,42 @@
       navbar.classList.toggle("active");
     });
 
-    // Slider logic
+    // Slider
     const slides = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides img');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
     let counter = 0;
-
-    function showSlide(index) {
-      if (index >= slideImages.length) counter = 0;
-      if (index < 0) counter = slideImages.length - 1;
-      slides.style.transform = `translateX(${-counter * 100}%)`;
+    function showSlide(index){
+      if(index>=slideImages.length) counter=0;
+      if(index<0) counter=slideImages.length-1;
+      slides.style.transform = `translateX(${-counter*100}%)`;
     }
+    nextBtn.addEventListener('click',()=>{counter++; showSlide(counter);});
+    prevBtn.addEventListener('click',()=>{counter--; showSlide(counter);});
+    setInterval(()=>{counter++; showSlide(counter);},5000);
 
-    nextBtn.addEventListener('click', () => { counter++; showSlide(counter); });
-    prevBtn.addEventListener('click', () => { counter--; showSlide(counter); });
-    setInterval(() => { counter++; showSlide(counter); }, 5000);
-
-    // Animate footer numbers
+    // Animate numbers
     const counters = document.querySelectorAll('.count');
     const speed = 50;
-
-    const animateCounters = () => {
-      counters.forEach(counter => {
-        const updateCount = () => {
+    const animateCounters = ()=>{
+      counters.forEach(counter=>{
+        const updateCount=()=>{
           const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText.replace(/,/g, '');
-          const increment = Math.ceil(target / speed);
-
-          if (count < target) {
-            counter.innerText = (count + increment).toLocaleString();
-            setTimeout(updateCount, 40);
-          } else {
-            counter.innerText = target.toLocaleString();
-          }
-        };
+          const count = +counter.innerText.replace(/,/g,'');
+          const increment = Math.ceil(target/speed);
+          if(count<target){
+            counter.innerText = (count+increment).toLocaleString();
+            setTimeout(updateCount,40);
+          } else counter.innerText = target.toLocaleString();
+        }
         updateCount();
       });
-    };
-
+    }
     const footer = document.querySelector('footer');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-          observer.unobserve(footer);
-        }
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ animateCounters(); observer.unobserve(footer);}
       });
     });
     observer.observe(footer);
