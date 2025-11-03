@@ -11,15 +11,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <link rel="stylesheet" href="./service.css" />
 </head>
 <body>
 
   <!-- ===== HEADER ===== -->
   <header>
-    <h2><a href="index.html" style="text-decoration:none; color:#ff0055;">Ammar Malik</a></h2>
-    <div class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></div>
+    <h2><a href="index.html" class="logo">Ammar Malik</a></h2>
+
+    <!-- Hamburger Menu -->
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <nav id="navbar">
       <ul>
         <li><a href="./index.html">Home</a></li>
@@ -66,7 +72,11 @@
   <script>
     const menuToggle = document.getElementById("menu-toggle");
     const navbar = document.getElementById("navbar");
-    menuToggle.addEventListener("click", () => navbar.classList.toggle("active"));
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      navbar.classList.toggle("active");
+    });
   </script>
 
 </body>
